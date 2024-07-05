@@ -1,5 +1,37 @@
 {% extends 'django_bpaml_event/base.html' %}
 {% block main %}
 <h1>Selected event</h1>
-<p>Beginners' Python and Machine Learning</p>
+<h2>{{event.title}}</h2>
+<h3>Code: {{event.code}}  Date: {{event.date}}</h3>
+<h3>Location: {{event.location}}</h3>
+<div>{{event.description|safe}}</div>
+<h2>Attendee list</h2>
+<table>
+    <tr>
+        {% if user.is_superuser %}
+        <th>Email address</th>
+        <th>Name</th>
+        {% endif %}
+        <th>Meetup name</th>
+    </tr>
+    {% for attendee in event.attendees.all %}
+    <tr>
+        {% if user.is_superuser %}
+        <td>{{attendee.email}}</td>
+        <td>{{attendee.first_name}} {{attendee.last_name}}</td>
+        {% endif %}
+        <td>{{attendee.meetup_name}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
+
+{% block nav-breadcrumbs %}
+<nav aria-label="Breadcrumbs">
+  <div class="breadcrumbs">
+    <a href="{% url 'index' %}">Events</a>
+      &gt;
+    <a href="{% url 'event' event.code %}">{{event.code}}</a>
+  </div>
+</nav>
 {% endblock %}

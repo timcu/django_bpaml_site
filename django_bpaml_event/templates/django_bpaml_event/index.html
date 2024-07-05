@@ -1,9 +1,18 @@
 {% extends 'django_bpaml_event/base.html' %}
 {% block main %}
+<section>
+{% if list_events %}
 <h1>Upcoming events</h1>
-<ul>
-  <li>One</li>
-  <li>Two</li>
-  <li>Three</li>
-</ul>
+    <table>
+    {% for event in list_events %}
+        <tr>
+            <td><a href="{% url 'event' event.code %}">{{ event.date }}</a></td>
+            <td>{{ event.title }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% else %}
+    <p>No events have been scheduled</p>
+{% endif %}
+</section>
 {% endblock %}
