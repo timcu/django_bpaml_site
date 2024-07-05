@@ -36,17 +36,17 @@ If you are following the script manually
 Edit `django_bpaml_site/settings.py`
 
 ```python
+INSTALLED_APPS = [
+    'django_bpaml_event.apps.DjangoBpamlEventConfig',
+    # ... before django.contrib
+]
+# ...
 TEMPLATES = [
     {
         # ...
         'DIRS': ['templates'],
         # ...
     },
-]
-# ...
-INSTALLED_APPS = [
-    'django_bpaml_event.apps.DjangoBpamlEventConfig',
-    # ... before django.contrib
 ]
 ```
 
