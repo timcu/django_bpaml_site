@@ -16,3 +16,11 @@
 {% endif %}
 </section>
 {% endblock %}
+
+{% block nav-breadcrumbs %}
+<nav aria-label="Breadcrumbs">
+  <div class="breadcrumbs">
+    <a href="{% url 'index' %}">Events</a>
+  </div>
+</nav>
+{% endblock %}
