@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import json
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -29,9 +29,19 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+AUTHENTICATION_BACKENDS = [
+    # Needed to log in by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 INSTALLED_APPS = [
     'django_bpaml_event.apps.DjangoBpamlEventConfig',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -48,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'django_bpaml_site.urls'
@@ -125,3 +136,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Override the provided user model for our use (adding a field for meetup_name and relationship to events)
 AUTH_USER_MODEL = 'django_bpaml_event.User'
+
+try:
+    with open('client_secret.json', mode='r') as json_file:
+        client_secret = json.load(json_file)
+except FileNotFoundError:
+    client_secret = {'web': {'client_id': 'placeholder', 'client_secret': 'placeholder'}}
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APPS': [{
+            'client_id': client_secret['web']['client_id'],
+            'secret': client_secret['web']['client_secret'],
+            'key': ''
+        }],
+        'EMAIL_AUTHENTICATION': True,  # User will take over account with his email
+    }
+}

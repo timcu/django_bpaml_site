@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('bpaml-event/', include('django_bpaml_event.urls')),
     path('', TemplateView.as_view(template_name="bpaml_home.html")),
+    path('accounts/', include('allauth.urls')),
 ]
