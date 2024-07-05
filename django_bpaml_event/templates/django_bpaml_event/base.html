@@ -23,7 +23,7 @@
                 <tr><td><div><a class="btnlink" href="{% url 'member-edit' %}">Update member details</a></div></td></tr>
                 <tr><td><div><a class="btnlink" href="{% url 'account_logout' %}">Sign out</a></div></td></tr>
                 {% else %}
-                <tr><td><div>Not logged in. <a class="btnlink" href="{% url 'admin:login' %}?next={{request.path}}">Sign in</a></div></td></tr>
+                <tr><td><div>Logged out <a class="btnlink" href="{% provider_login_url 'google' %}">Sign in with Google</a></div></td></tr>
                 {% endif %}
             </table>
         </div>
