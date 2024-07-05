@@ -1,0 +1,5 @@
+include LICENSE
+include README.md
+recursive-include django_bpaml_event/static *
+recursive-include django_bpaml_event/templates *
+recursive-include docs *
