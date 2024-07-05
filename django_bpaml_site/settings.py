@@ -122,3 +122,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Override the provided user model for our use (adding a field for meetup_name and relationship to events)
+AUTH_USER_MODEL = 'django_bpaml_event.User'
