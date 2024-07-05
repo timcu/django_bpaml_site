@@ -2,6 +2,7 @@ import datetime
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.http import HttpResponseRedirect
+from django.urls import reverse
 from allauth.account.decorators import login_required
 from django_bpaml_event.models import Event
 
@@ -40,3 +41,16 @@ def attend(request, code, rsvp):
         return render(request, 'django_bpaml_event/event.html', context)
     else:
         return HttpResponseRedirect(url_next)
+
+
+@login_required()
+def member(request):
+    if request.method == "POST":
+        user = request.user
+        user.first_name = request.POST.get("first-name", user.first_name)
+        user.last_name = request.POST.get("last-name", user.last_name)
+        user.meetup_name = request.POST.get("meetup-name", user.meetup_name)
+        user.save()
+        return HttpResponseRedirect(reverse("index"))
+    else:
+        return render(request, "django_bpaml_event/member.html", context={})
