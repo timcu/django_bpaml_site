@@ -16,8 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.views.generic import TemplateView  # new
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('bpaml-event/', include('django_bpaml_event.urls'))
+    path('bpaml-event/', include('django_bpaml_event.urls')),
+    path('', TemplateView.as_view(template_name="bpaml_home.html")),
 ]

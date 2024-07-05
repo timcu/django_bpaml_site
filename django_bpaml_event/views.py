@@ -1,5 +1,9 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def index_page(request):
-    return HttpResponse("<h1>BPAML Event</h1>")
+    return render(request, 'django_bpaml_event/index.html', {})
+
+
+def event_page(request, code):
+    return render(request, 'django_bpaml_event/event.html', {'code': code})
