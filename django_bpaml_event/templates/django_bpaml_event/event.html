@@ -4,6 +4,16 @@
 <h2>{{event.title}}</h2>
 <h3>Code: {{event.code}}  Date: {{event.date}}</h3>
 <h3>Location: {{event.location}}</h3>
+{% if user.is_authenticated %}
+<p class="highlight">
+    Member {{ user.first_name }} {{user.last_name}} with email address {{ user.email }}:
+    {% if user in event.attendees.all %}
+      ATTENDING  (<a href="{% url 'attend' code=event.code rsvp='no' %}" title="change to NOT ATTENDING">change</a>)
+    {% else %}
+      NOT ATTENDING (<a href="{% url 'attend' code=event.code rsvp='yes' %}" title="change to ATTENDING">change</a>)
+    {% endif %}
+</p>
+{% endif %}
 <div>{{event.description|safe}}</div>
 <h2>Attendee list</h2>
 <table>
