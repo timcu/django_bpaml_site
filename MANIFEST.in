@@ -1,5 +1,4 @@
-include LICENSE
-include README.md
-recursive-include django_bpaml_event/static *
-recursive-include django_bpaml_event/templates *
-recursive-include docs *
+# setuptools_scm includes all files in git so need to exclude some
+recursive-exclude .idea *
+recursive-exclude django_bpaml_site *
+exclude manage.py requirements.txt meetup206_tim_django.md
