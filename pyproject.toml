@@ -1,0 +1,49 @@
+[project]
+name = "django-bpaml-event"
+dynamic = ["version"]
+authors = [
+    {name = "D Tim Cummings", email = "pythonatordev@gmail.com"},
+]
+description = "A Django app to accept registrations for upcoming events using Google login"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">= 3.10"
+keywords = ["bpaml", "registration", "oauth", "django", "google", "beginners' python"]
+dependencies = [
+    "Django ~= 5.1.1",
+    "django-allauth[socialaccount] ~= 64.2.1",
+    "gunicorn ~= 23.0.0",
+    "psycopg ~= 3.2.1",
+]
+
+classifiers =[
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Environment :: Web Environment",
+    "Framework :: Django",
+    "Framework :: Django :: 5.1.1",
+    "Intended Audience :: Developers",
+    "Natural Language :: English",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+]
+
+[project.urls]
+homepage = "https://bpaml.pythonator.com/bpaml-event/"
+repository = "https://github.com/timcu/django_bpaml_site"
+
+[build-system]
+requires = ['setuptools>=74.1.2', "wheel>=0.44.0", "setuptools-scm[toml]>=8.1.0"]
+build-backend = 'setuptools.build_meta'
+
+[tool.setuptools_scm]
+version_file = "django_bpaml_event/_version.py"
+
+[tool.setuptools.packages.find]
+include = ["django_bpaml_event*"]
